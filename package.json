@@ -1,0 +1,69 @@
+{
+  "name": "@niondigital/moco-mcp",
+  "version": "1.0.0",
+  "description": "Model Context Protocol (MCP) server for MoCo API access - time tracking, project management, holidays, and presence monitoring",
+  "main": "dist/index.js",
+  "bin": {
+    "@niondigital/moco-mcp": "./dist/index.js"
+  },
+  "type": "module",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "prepublishOnly": "npm run build",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:unit": "jest tests/unit",
+    "test:integration": "jest tests/integration",
+    "test:mcp": "jest tests/mcp"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "moco",
+    "time-tracking",
+    "project-management",
+    "api",
+    "typescript",
+    "claude",
+    "ai",
+    "assistant"
+  ],
+  "author": {
+    "name": "David Seibert, nion digital",
+    "email": "david.seibert@nion-digital.com",
+    "url": "https://www.nion-digital.com/"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/niondigital/moco-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/niondigital/moco-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niondigital/moco-mcp/issues"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.2.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.4.1",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2"
+  }
+}
