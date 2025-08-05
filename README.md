@@ -224,6 +224,7 @@ Use the `env` section in your MCP client configuration as shown above.
 | `get_user_holidays` | Get holiday overview for a year with calculations | `year` |
 | `get_user_presences` | Get presence data within a date range with daily summaries | `startDate`, `endDate` (ISO 8601) |
 | `get_user_sick_days` | Get sick days overview for a year with calculations | `year` |
+| `get_public_holidays` | Get public holidays for a year with working days calculations | `year` |
 
 ## 📝 Tool Examples
 
@@ -363,6 +364,37 @@ Statistics:
 }
 ```
 
+### Get Public Holidays
+
+```json
+{
+  "name": "get_public_holidays",
+  "arguments": {
+    "year": 2024
+  }
+}
+```
+
+**Sample Output:**
+```
+Public holidays for 2024:
+
+Holiday dates:
+- 2024-01-01: New Year's Day
+- 2024-04-01: Good Friday
+- 2024-04-03: Easter Monday
+- 2024-05-01: Labor Day
+- 2024-05-09: Ascension Day
+- 2024-05-20: Whit Monday
+- 2024-10-03: German Unity Day
+- 2024-12-25: Christmas Day
+- 2024-12-26: Boxing Day
+
+Summary:
+- Total public holidays: 9 days
+- Approximate working days: 251 days
+```
+
 ## 🔧 Advanced Configuration
 
 <details>
@@ -474,7 +506,7 @@ echo '{"jsonrpc": "2.0", "id": 1, "method": "tools/list"}' | npx -y @niondigital
 - **🎯 Project Filtering:** Filter activities by specific projects
 - **⚡ Fast Performance:** Efficient API calls with proper caching
 - **🛡️ Type Safety:** Full TypeScript implementation
-- **🧩 Comprehensive Tools:** 6 specialized tools for different use cases
+- **🧩 Comprehensive Tools:** 7 specialized tools for different use cases
 - **📅 Date Validation:** Automatic date format validation
 - **🔍 Error Handling:** User-friendly error messages
 - **🌐 Multi-Client Support:** Works with all major MCP clients
@@ -500,10 +532,11 @@ MIT License - see [LICENSE](LICENSE) file for details.
 ## 📈 Changelog
 
 ### v1.0.0
-- ✨ Initial release with 6 MCP tools
+- ✨ Initial release with 7 MCP tools
 - 🚀 NPM package with `npx` support
 - 📚 Multi-client installation guides
 - 🔧 Full TypeScript implementation
 - ⚡ Automatic pagination and error handling
 - 🎯 Project filtering for activities
 - 📊 Comprehensive time tracking and project management
+- 🎅 Public holidays tracking for working days calculation

@@ -321,6 +321,37 @@ export class MocoApiService {
   }
 
   /**
+   * Retrieves public holidays for a specific year using schedules endpoint
+   * @param year - Year (e.g., 2024)
+   * @returns Promise with array of public holiday schedules
+   */
+  async getPublicHolidays(year: number): Promise<any[]> {
+    // Calculate year date range
+    const startDate = `${year}-01-01`;
+    const endDate = `${year}-12-31`;
+    
+    try {
+      // Get ALL schedules using direct request
+      const allSchedules = await this.makeRequest<any[]>('/schedules', {
+        from: startDate,
+        to: endDate
+      });
+      
+      // Filter for public holidays (assignment code "2" and type "Absence")
+      const publicHolidays = allSchedules.filter(schedule => 
+        schedule.assignment && 
+        schedule.assignment.type === 'Absence' &&
+        schedule.assignment.code === '2'
+      );
+      
+      return publicHolidays;
+    } catch (error) {
+      console.error('DEBUG API: Error fetching public holidays:', error);
+      return [];
+    }
+  }
+
+  /**
    * Retrieves user presences within a date range
    * @param startDate - Start date in ISO 8601 format (YYYY-MM-DD)
    * @param endDate - End date in ISO 8601 format (YYYY-MM-DD)

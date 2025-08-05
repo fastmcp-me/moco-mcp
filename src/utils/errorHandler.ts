@@ -108,7 +108,7 @@ export function createValidationErrorMessage(error: {
  * @returns User-friendly message in English
  */
 export function createEmptyResultMessage(context: {
-  type: 'activities' | 'projects' | 'tasks' | 'holidays' | 'presences';
+  type: 'activities' | 'projects' | 'tasks' | 'holidays' | 'presences' | 'public_holidays';
   startDate?: string;
   endDate?: string;
   year?: number;

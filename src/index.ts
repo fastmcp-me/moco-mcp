@@ -22,6 +22,7 @@ import { getProjectsTool, getProjectTasksTool } from './tools/projectsTools.js';
 import { getUserHolidaysTool } from './tools/userHolidaysTools.js';
 import { getUserPresencesTool } from './tools/userPresencesTools.js';
 import { getUserSickDaysTool } from './tools/userSickDaysTools.js';
+import { getPublicHolidaysTool } from './tools/publicHolidaysTools.js';
 
 /**
  * Available MCP tools for MoCo API access
@@ -32,7 +33,8 @@ const AVAILABLE_TOOLS = [
   getProjectTasksTool,
   getUserHolidaysTool,
   getUserPresencesTool,
-  getUserSickDaysTool
+  getUserSickDaysTool,
+  getPublicHolidaysTool
 ];
 
 const server = new Server(
