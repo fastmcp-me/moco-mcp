@@ -20,11 +20,11 @@ const GetProjectTasksSchema = z.object({
 });
 
 /**
- * Tool: get_projects
- * Retrieves all projects or searches for projects by name/description
+ * Tool: get_user_projects
+ * Retrieves all assigned projects or searches for assigned projects by name/description
  */
-export const getProjectsTool = {
-  name: 'get_projects',
+export const getUserProjectsTool = {
+  name: 'get_user_projects',
   description: 'Get all projects assigned to the current user or search within assigned projects by name/description. If no query is provided, returns all assigned projects.',
   inputSchema: zodToJsonSchema(GetProjectsSchema),
   handler: async (params: z.infer<typeof GetProjectsSchema>): Promise<string> => {
@@ -62,11 +62,11 @@ export const getProjectsTool = {
 };
 
 /**
- * Tool: get_project_tasks
- * Retrieves all tasks for a specific project
+ * Tool: get_user_project_tasks
+ * Retrieves all tasks for a specific assigned project
  */
-export const getProjectTasksTool = {
-  name: 'get_project_tasks',
+export const getUserProjectTasksTool = {
+  name: 'get_user_project_tasks',
   description: 'Get all tasks for a specific assigned project by project ID. Only works for projects assigned to the current user.',
   inputSchema: zodToJsonSchema(GetProjectTasksSchema),
   handler: async (params: z.infer<typeof GetProjectTasksSchema>): Promise<string> => {

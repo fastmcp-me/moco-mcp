@@ -139,7 +139,7 @@ describe('End-to-End MCP Workflows', () => {
 
       // Step 1: List all projects
       const projectsResponse = await client.sendRequest('tools/call', {
-        name: 'get_projects',
+        name: 'get_user_projects',
         arguments: {}
       });
 
@@ -177,7 +177,7 @@ describe('End-to-End MCP Workflows', () => {
 
       // Step 2: Get tasks for specific project
       const tasksResponse = await client.sendRequest('tools/call', {
-        name: 'get_project_tasks',
+        name: 'get_user_project_tasks',
         arguments: { projectId: 123 }
       });
 
@@ -209,7 +209,7 @@ describe('End-to-End MCP Workflows', () => {
       } as Response);
 
       const searchResponse = await client.sendRequest('tools/call', {
-        name: 'get_projects',
+        name: 'get_user_projects',
         arguments: { query: 'website' }
       });
 
@@ -415,7 +415,7 @@ describe('End-to-End MCP Workflows', () => {
       } as Response);
 
       const response = await client.sendRequest('tools/call', {
-        name: 'get_projects',
+        name: 'get_user_projects',
         arguments: {}
       });
 
@@ -441,7 +441,7 @@ describe('End-to-End MCP Workflows', () => {
       mockFetch.mockRejectedValueOnce(new TypeError('Network error'));
 
       const response = await client.sendRequest('tools/call', {
-        name: 'get_projects',
+        name: 'get_user_projects',
         arguments: {}
       });
 
@@ -471,7 +471,7 @@ describe('End-to-End MCP Workflows', () => {
       } as Response);
 
       const projectSearch = await client.sendRequest('tools/call', {
-        name: 'get_projects',
+        name: 'get_user_projects',
         arguments: { query: 'website' }
       });
 
@@ -495,7 +495,7 @@ describe('End-to-End MCP Workflows', () => {
       } as Response);
 
       const projectTasks = await client.sendRequest('tools/call', {
-        name: 'get_project_tasks',
+        name: 'get_user_project_tasks',
         arguments: { projectId: 123 }
       });
 

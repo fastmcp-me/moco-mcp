@@ -149,7 +149,8 @@ describe('MocoApiService Integration Tests', () => {
           created_at: '2024-01-01T00:00:00Z',
           updated_at: '2024-01-01T00:00:00Z',
           customer: { id: 1, name: 'ACME Corp' },
-          leader: { id: 2, firstname: 'Jane', lastname: 'Smith' }
+          leader: { id: 2, firstname: 'Jane', lastname: 'Smith' },
+          tasks: []
         }
       ];
 
@@ -166,11 +167,13 @@ describe('MocoApiService Integration Tests', () => {
       const result = await apiService.getProjects();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        'https://test-company.mocoapp.com/api/v1/projects?page=1',
+        'https://test-company.mocoapp.com/api/v1/projects/assigned?page=1',
         expect.objectContaining({
           method: 'GET',
           headers: expect.objectContaining({
-            'Authorization': 'Token token=test-api-key'
+            'Authorization': 'Token token=test-api-key',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
           })
         })
       );
@@ -189,7 +192,8 @@ describe('MocoApiService Integration Tests', () => {
           active: true,
           currency: 'EUR',
           created_at: '2024-01-01T00:00:00Z',
-          updated_at: '2024-01-01T00:00:00Z'
+          updated_at: '2024-01-01T00:00:00Z',
+          tasks: []
         },
         {
           id: 2,
@@ -198,7 +202,8 @@ describe('MocoApiService Integration Tests', () => {
           active: true,
           currency: 'EUR',
           created_at: '2024-01-01T00:00:00Z',
-          updated_at: '2024-01-01T00:00:00Z'
+          updated_at: '2024-01-01T00:00:00Z',
+          tasks: []
         }
       ];
 
@@ -227,7 +232,8 @@ describe('MocoApiService Integration Tests', () => {
           active: true,
           currency: 'EUR',
           created_at: '2024-01-01T00:00:00Z',
-          updated_at: '2024-01-01T00:00:00Z'
+          updated_at: '2024-01-01T00:00:00Z',
+          tasks: []
         }
       ];
 
@@ -254,13 +260,19 @@ describe('MocoApiService Integration Tests', () => {
           active: true,
           currency: 'EUR',
           created_at: '2024-01-01T00:00:00Z',
-          updated_at: '2024-01-01T00:00:00Z'
+          updated_at: '2024-01-01T00:00:00Z',
+          tasks: []
         }
       ];
 
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ data: allProjects, meta: { total_pages: 1 } })
+        json: async () => allProjects,
+        headers: new Headers({
+          'X-Page': '1',
+          'X-Per-Page': '25',
+          'X-Total': '2'
+        })
       } as Response);
 
       const result = await apiService.searchProjects('mobile');
@@ -270,31 +282,52 @@ describe('MocoApiService Integration Tests', () => {
 
   describe('getProjectTasks', () => {
     it('should fetch tasks for specific project', async () => {
-      const mockTasks: Task[] = [
+      const mockProjects: Project[] = [
         {
-          id: 456,
-          name: 'Frontend Development',
+          id: 123,
+          name: 'Website Redesign',
+          description: 'Complete website overhaul',
           active: true,
-          billable: true,
-          project: { id: 123, name: 'Website' },
+          currency: 'EUR',
+          budget: 50000,
           created_at: '2024-01-01T00:00:00Z',
-          updated_at: '2024-01-01T00:00:00Z'
+          updated_at: '2024-01-01T00:00:00Z',
+          customer: { id: 1, name: 'ACME Corp' },
+          leader: { id: 2, firstname: 'Jane', lastname: 'Smith' },
+          tasks: [
+            {
+              id: 456,
+              name: 'Frontend Development',
+              active: true,
+              billable: true
+            }
+          ]
         }
       ];
 
+      // Mock the getProjects() call that getProjectTasks() makes internally
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ data: mockTasks, meta: { total_pages: 1 } })
+        json: async () => mockProjects,
+        headers: new Headers({
+          'X-Page': '1',
+          'X-Per-Page': '25',
+          'X-Total': '1'
+        })
       } as Response);
 
       const result = await apiService.getProjectTasks(123);
 
       expect(mockFetch).toHaveBeenCalledWith(
-        'https://test-company.mocoapp.com/api/v1/projects/tasks?project_id=123&page=1',
+        'https://test-company.mocoapp.com/api/v1/projects/assigned?page=1',
         expect.any(Object)
       );
 
-      expect(result).toEqual(mockTasks);
+      expect(result).toHaveLength(1);
+      expect(result[0].name).toBe('Frontend Development');
+      expect(result[0].id).toBe(456);
+      expect(result[0].active).toBe(true);
+      expect(result[0].billable).toBe(true);
     });
   });
 
@@ -359,7 +392,12 @@ describe('MocoApiService Integration Tests', () => {
 
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ data: mockPresences, meta: { total_pages: 1 } })
+        json: async () => mockPresences,
+        headers: new Headers({
+          'X-Page': '1',
+          'X-Per-Page': '25',
+          'X-Total': '1'
+        })
       } as Response);
 
       const result = await apiService.getUserPresences('2024-01-01', '2024-01-31');

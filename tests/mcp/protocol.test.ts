@@ -204,12 +204,12 @@ describe('MCP Protocol Compliance', () => {
               inputSchema: expect.any(Object)
             }),
             expect.objectContaining({
-              name: 'get_projects',
+              name: 'get_user_projects',
               description: expect.any(String),
               inputSchema: expect.any(Object)
             }),
             expect.objectContaining({
-              name: 'get_project_tasks',
+              name: 'get_user_project_tasks',
               description: expect.any(String),
               inputSchema: expect.any(Object)
             }),
@@ -227,8 +227,8 @@ describe('MCP Protocol Compliance', () => {
         }
       });
 
-      // Verify we have exactly 5 tools
-      expect(response.result.tools).toHaveLength(5);
+      // Verify we have exactly 7 tools  
+      expect(response.result.tools).toHaveLength(7);
     });
 
     it('should validate tool input schemas', async () => {
@@ -288,9 +288,9 @@ describe('MCP Protocol Compliance', () => {
   });
 
   describe('Tool-Specific Protocol Compliance', () => {
-    it('should handle get_projects tool call', async () => {
+    it('should handle get_user_projects tool call', async () => {
       const response = await sendRequest('tools/call', {
-        name: 'get_projects',
+        name: 'get_user_projects',
         arguments: {}
       });
 
@@ -308,9 +308,9 @@ describe('MCP Protocol Compliance', () => {
       });
     });
 
-    it('should handle get_projects with search query', async () => {
+    it('should handle get_user_projects with search query', async () => {
       const response = await sendRequest('tools/call', {
-        name: 'get_projects',
+        name: 'get_user_projects',
         arguments: {
           query: 'test'
         }
@@ -330,9 +330,9 @@ describe('MCP Protocol Compliance', () => {
       });
     });
 
-    it('should handle get_project_tasks tool call', async () => {
+    it('should handle get_user_project_tasks tool call', async () => {
       const response = await sendRequest('tools/call', {
-        name: 'get_project_tasks',
+        name: 'get_user_project_tasks',
         arguments: {
           projectId: 123
         }
@@ -354,7 +354,7 @@ describe('MCP Protocol Compliance', () => {
 
     it('should validate project ID parameter', async () => {
       const response = await sendRequest('tools/call', {
-        name: 'get_project_tasks',
+        name: 'get_user_project_tasks',
         arguments: {
           projectId: -1
         }

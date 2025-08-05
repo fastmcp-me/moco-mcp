@@ -219,12 +219,74 @@ Use the `env` section in your MCP client configuration as shown above.
 | Tool | Description | Parameters |
 |------|-------------|------------|
 | `get_activities` | Get activities within a date range with summation and optional project filtering | `startDate`, `endDate` (ISO 8601), `projectId` (optional) |
-| `get_projects` | List all assigned projects or search by query | `query` (optional) |
-| `get_project_tasks` | Get all tasks for a specific assigned project | `projectId` |
+| `get_user_projects` | List all assigned projects or search by query | `query` (optional) |
+| `get_user_project_tasks` | Get all tasks for a specific assigned project | `projectId` |
 | `get_user_holidays` | Get holiday overview for a year with calculations | `year` |
 | `get_user_presences` | Get presence data within a date range with daily summaries | `startDate`, `endDate` (ISO 8601) |
 | `get_user_sick_days` | Get sick days overview for a year with calculations | `year` |
 | `get_public_holidays` | Get public holidays for a year with working days calculations | `year` |
+
+## 🎯 Available Prompts
+
+The MoCo MCP server provides 8 intelligent prompts that orchestrate multiple tools to deliver comprehensive insights:
+
+| Prompt | Description | Key Parameters |
+|--------|-------------|----------------|
+| `weekly_time_report` | Generates detailed weekly time tracking report with project breakdown | `week_start`, `include_billable_analysis` |
+| `vacation_planning_assistant` | Assists with vacation planning by analyzing available days and holidays | `planned_start_date`, `planned_end_date` |
+| `personal_productivity_insights` | Analyzes work habits and provides productivity recommendations | `analysis_period`, `focus_area` |
+| `monthly_business_review` | Creates comprehensive business reports with trends and metrics | `month`, `year`, `include_comparisons` |
+| `smart_work_life_balance_advisor` | Evaluates work-life balance with personalized recommendations | `analysis_weeks`, `target_hours_per_week` |
+| `project_time_analysis` | Detailed project time analysis with efficiency metrics | `project_ids`, `time_period` |
+| `team_capacity_overview` | Team capacity planning with absence and resource analysis | `planning_horizon`, `include_holidays` |
+| `work_hours_compliance_check` | Compliance check for working time regulations | `check_period`, `max_weekly_hours`, `max_daily_hours` |
+
+### Prompt Examples
+
+**Weekly Time Report:**
+```json
+{
+  "name": "weekly_time_report",
+  "arguments": {
+    "week_start": "2024-01-15",
+    "include_billable_analysis": true
+  }
+}
+```
+
+**Vacation Planning:**
+```json
+{
+  "name": "vacation_planning_assistant",
+  "arguments": {
+    "planned_start_date": "2024-07-15",
+    "planned_end_date": "2024-07-29"
+  }
+}
+```
+
+**Work-Life Balance Analysis:**
+```json
+{
+  "name": "smart_work_life_balance_advisor",
+  "arguments": {
+    "analysis_weeks": 6,
+    "target_hours_per_week": 40
+  }
+}
+```
+
+**Compliance Check:**
+```json
+{
+  "name": "work_hours_compliance_check",
+  "arguments": {
+    "check_period": "last_month",
+    "max_weekly_hours": 48,
+    "max_daily_hours": 10
+  }
+}
+```
 
 ## 📝 Tool Examples
 
@@ -267,12 +329,12 @@ Activities from 2024-01-01 to 2024-01-31:
 Grand total: 7.75h (7:45)
 ```
 
-### Get Projects
+### Get User Projects
 
 **List all assigned projects:**
 ```json
 {
-  "name": "get_projects",
+  "name": "get_user_projects",
   "arguments": {}
 }
 ```
@@ -280,18 +342,18 @@ Grand total: 7.75h (7:45)
 **Search projects:**
 ```json
 {
-  "name": "get_projects",
+  "name": "get_user_projects",
   "arguments": {
     "query": "website"
   }
 }
 ```
 
-### Get Project Tasks
+### Get User Project Tasks
 
 ```json
 {
-  "name": "get_project_tasks",
+  "name": "get_user_project_tasks",
   "arguments": {
     "projectId": 123456
   }
@@ -507,6 +569,7 @@ echo '{"jsonrpc": "2.0", "id": 1, "method": "tools/list"}' | npx -y @niondigital
 - **⚡ Fast Performance:** Efficient API calls with proper caching
 - **🛡️ Type Safety:** Full TypeScript implementation
 - **🧩 Comprehensive Tools:** 7 specialized tools for different use cases
+- **🎯 Intelligent Prompts:** 8 AI-powered prompts for complex analysis and insights
 - **📅 Date Validation:** Automatic date format validation
 - **🔍 Error Handling:** User-friendly error messages
 - **🌐 Multi-Client Support:** Works with all major MCP clients
