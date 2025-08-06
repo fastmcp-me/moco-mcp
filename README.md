@@ -182,17 +182,17 @@ Configure Gemini CLI with MCP support:
 
 </details>
 
-## 🔑 MoCo API Setup
+## 🔑 MOCO API Setup
 
 ### Getting Your API Credentials
 
-1. **Log into your MoCo account**
+1. **Log into your MOCO account**
 2. **Navigate to API settings:**
    - Go to **Profile** → **Integrations**
    - Or visit: `https://niondigital.mocoapp.com/profile/integrations`
 3. **Copy the listed API key**
 4. **Note your subdomain:**
-   - From your MoCo URL: `https://yourcompany.mocoapp.com`
+   - From your MOCO URL: `https://yourcompany.mocoapp.com`
    - Your subdomain is: `yourcompany`
 
 ### Environment Variables
@@ -588,18 +588,6 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 🆘 Support
 
-- **MoCo API Issues:** [MoCo API Documentation](https://github.com/hundertzehn/mocoapp-api-docs)
+- **MOCO API Issues:** [MoCo API Documentation](https://github.com/hundertzehn/mocoapp-api-docs)
 - **MCP Protocol:** [MCP Documentation](https://modelcontextprotocol.io/)
 - **This Package:** [GitHub Issues](https://github.com/niondigital/moco-mcp/issues)
-
-## 📈 Changelog
-
-### v1.0.0
-- ✨ Initial release with 7 MCP tools
-- 🚀 NPM package with `npx` support
-- 📚 Multi-client installation guides
-- 🔧 Full TypeScript implementation
-- ⚡ Automatic pagination and error handling
-- 🎯 Project filtering for activities
-- 📊 Comprehensive time tracking and project management
-- 🎅 Public holidays tracking for working days calculation
