@@ -584,6 +584,6 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 🆘 Support
 
-- **MOCO API Issues:** [MoCo API Documentation](https://github.com/hundertzehn/mocoapp-api-docs)
+- **MOCO API Issues:** [MOCO API Documentation](https://github.com/hundertzehn/mocoapp-api-docs)
 - **MCP Protocol:** [MCP Documentation](https://modelcontextprotocol.io/)
 - **This Package:** [GitHub Issues](https://github.com/niondigital/moco-mcp/issues)
