@@ -566,12 +566,8 @@ echo '{"jsonrpc": "2.0", "id": 1, "method": "tools/list"}' | npx -y @niondigital
 - **🔄 Automatic Pagination:** Handles large datasets seamlessly  
 - **📊 Smart Aggregation:** Automatic summation by date, project, and task
 - **🎯 Project Filtering:** Filter activities by specific projects
-- **⚡ Fast Performance:** Efficient API calls with proper caching
-- **🛡️ Type Safety:** Full TypeScript implementation
 - **🧩 Comprehensive Tools:** 7 specialized tools for different use cases
 - **🎯 Intelligent Prompts:** 8 AI-powered prompts for complex analysis and insights
-- **📅 Date Validation:** Automatic date format validation
-- **🔍 Error Handling:** User-friendly error messages
 - **🌐 Multi-Client Support:** Works with all major MCP clients
 
 ## 🤝 Contributing
